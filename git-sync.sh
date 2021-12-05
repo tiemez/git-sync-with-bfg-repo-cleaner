@@ -44,7 +44,7 @@ git --no-pager branch -a -vv
 
 java -jar bfg.jar --strip-blobs-bigger-than 100M $(basename $SOURCE_REPO)
 cd $(basename $SOURCE_REPO) && git reflog expire --expire=now --all && git gc --prune=now --aggressive
-git config core.bare false && git checkout master
+git config core.bare false && git checkout "$SOURCE_BRANCH"
 git remote add destination "$DESTINATION_REPO"
 
 if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
