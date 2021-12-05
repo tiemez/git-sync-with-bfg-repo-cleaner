@@ -10,5 +10,5 @@ RUN apk add --no-cache git openssh-client && \
 RUN wget https://repo1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar -O bfg.jar
 USER root
 COPY *.sh /git-sync/
-WORKDIR /git-sync/
+RUN ["chmod", "+x", "/git-sync/git-sync.sh"]
 ENTRYPOINT ["sh", "/git-sync/docker-entrypoint.sh"]
