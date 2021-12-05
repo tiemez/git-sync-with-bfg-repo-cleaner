@@ -1,0 +1,12 @@
+.DS_Store
+.env
+node_modules/
+*.log
+npm-debug.log*
+.npm/
+.eslintcache
+*.tgz
+.cache/
+.idea/
+sw.*
+*.swp
