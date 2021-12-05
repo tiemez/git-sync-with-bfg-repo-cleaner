@@ -30,9 +30,9 @@ echo "DESTINATION=$DESTINATION_REPO:$DESTINATION_BRANCH"
 
 if [[ -n "$SOURCE_SSH_PRIVATE_KEY" ]]; then
   # Clone using source ssh key if provided
-  git clone --mirror -c core.sshCommand="/usr/bin/ssh -i ~/.ssh/src_rsa" "$SOURCE_REPO" /root/source --origin source
+  git clone --mirror -c core.sshCommand="/usr/bin/ssh -i ~/.ssh/src_rsa" "$SOURCE_REPO" /root/source
 else
-  git clone --mirror "$SOURCE_REPO" /root/source --origin source
+  git clone --mirror "$SOURCE_REPO" /root/source
 fi
 
 
@@ -44,6 +44,7 @@ git --no-pager branch -a -vv
 
 java -jar bfg.jar --strip-blobs-bigger-than 100M $(basename $SOURCE_REPO)
 cd $(basename $SOURCE_REPO) && git reflog expire --expire=now --all && git gc --prune=now --aggressive
+git config core.bare false && git checkout master
 git remote add destination "$DESTINATION_REPO"
 
 if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
