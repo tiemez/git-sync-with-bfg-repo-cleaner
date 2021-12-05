@@ -8,6 +8,6 @@ RUN apk add --no-cache git openssh-client && \
   echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 
 RUN wget https://repo1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar -O bfg.jar
-
+USER root
 COPY *.sh /
 ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
